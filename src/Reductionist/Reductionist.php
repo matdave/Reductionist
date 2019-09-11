@@ -51,6 +51,7 @@ public function __construct($graphicsLib = 2) {
 		if (!isset(self::$maxsize)) {
 			self::$maxsize = ini_get('memory_limit');
 			$magnitude = strtoupper(substr(self::$maxsize, -1));
+			self::$maxsize = (int)preg_replace('/[^0-9]/', '', self::$maxsize);
 			if ($magnitude === 'G')  { self::$maxsize *= 1024; }
 			elseif ($magnitude === 'K')  { self::$maxsize /= 1024; }
 			self::$maxsize = (self::$maxsize - 18) * 209715;  // 20% of memory_limit, in bytes. -18MB for CMS, framework, PHP overhead
