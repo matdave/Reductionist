@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"imagine/imagine": "0.6.0"
+		"imagine/imagine": "0.6.3"
 	},
 	"autoload": {
 		"psr-0": {
