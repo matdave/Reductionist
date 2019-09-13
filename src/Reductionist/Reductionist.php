@@ -7,6 +7,8 @@ namespace Reductionist;
  * https://github.com/oo12/Reductionist
  **/
 
+require_once(dirname(dirname(dirname(__FILE__))) . '/vendor/autoload.php');
+
 use Imagine\Image\Box;
 
 class Reductionist {
