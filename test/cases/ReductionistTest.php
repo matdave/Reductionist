@@ -20,7 +20,9 @@ class ReductionistTest extends TestCase
     
     protected function setUp(): void
     {
-        require_once(dirname(dirname(dirname(__FILE__))) . '/src/Reductionist/Reductionist.php');
+        $this->basePath = dirname(dirname(__FILE__));
+        require_once(dirname($this->basePath) . '/vendor/autoload.php');
+        require_once(dirname($this->basePath) . '/src/Reductionist/Reductionist.php');
         $this->reductionist = new Reductionist($this->graphicsLib);
     }
     public function testConfig()
@@ -36,7 +38,7 @@ class ReductionistTest extends TestCase
             if (is_dir($dir . DIRECTORY_SEPARATOR . $file)) continue;
             $full = $this->basePath . $this->srcDir . $file;
             $thumb = $this->basePath . $this->outDir . $file;
-            $this->resizer->processImage(
+            $this->reductionist->processImage(
                 $full,
                 $thumb,
                 ['w' => $this->width, 'q' => $this->quality]
@@ -57,7 +59,7 @@ class ReductionistTest extends TestCase
             if (is_dir($dir . DIRECTORY_SEPARATOR . $file)) continue;
             $full = $this->basePath . $this->srcDir . $file;
             $thumb = $this->basePath . $this->outDir . $file;
-            $this->resizer->processImage(
+            $this->reductionist->processImage(
                 $full,
                 $thumb,
                 ['h' => $this->height, 'q' => $this->quality]
@@ -82,7 +84,7 @@ class ReductionistTest extends TestCase
             foreach ($formats as $ext => $type) {
                 if (pathinfo($full, PATHINFO_EXTENSION) === $ext) continue;
                 $thumb = $this->basePath . $this->outDir . $file . '.' . $ext;
-                $this->resizer->processImage(
+                $this->reductionist->processImage(
                     $full,
                     $thumb,
                     ['h' => $this->height, 'q' => $this->quality]
