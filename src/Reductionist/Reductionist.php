@@ -424,7 +424,7 @@ public function processImage($input, $output, $options = array()) {
 			else  { $bgBox = new Box($width, $height); }
 			$image = $this->imagine
 				->create($bgBox, self::$palette->color($bgColor[0], 100 - $bgColor[1]))
-				->paste($this->gLib ? $image->getImage() : $image, isset($farPoint) ? $farPoint : new \Imagine\Image\Point(0, 0));
+				->paste($image, isset($farPoint) ? $farPoint : new \Imagine\Image\Point(0, 0));
 		}
 
 /* filters (finish) */
