@@ -26,11 +26,10 @@ class Watermark extends ImagineAware {
 		if (empty(self::$rgb)) { self::$rgb = new RGB(); }
 	}
 
-
 	public function apply(ImageInterface $image) {
 		$imagine = $this->getImagine();
 		$class = get_class($image);
-		$isRImage = strpos($class, 'RImage');
+		$isRImage = strpos($class, 'Imagick');
 		$isGmagick = strpos($class, 'Gmagick');
 		/* Unfortunately Gmagick doesn't support opacity, so that's out for text
 		   and watermark images. Also watermark images need opacity in order to
@@ -127,7 +126,7 @@ class Watermark extends ImagineAware {
 					if ($this->debug) {
 						$this->debugmessages[] = ":: Text watermark with background: {$wmbgWidth}x$wmbgHeight px @ $wmbgStartPoint";
 					}
-					$image->paste($isRImage ? $wmbg->getImage() : $wmbg, $wmbgStartPoint);  // add to image
+					$image->paste($wmbg, $wmbgStartPoint);  // add to image
 				}
 				else {  // otherwise simply add text
 					$wmbgStartPoint = Reductionist::startPoint(  // Calculate top left coordinates for bg box
@@ -200,12 +199,12 @@ class Watermark extends ImagineAware {
 
 				if ($isRImage && !$isGmagick && $p['opacity'] < 100) {  // for Imagick we can easily reduce transparency
 					try {
-						$wm->fade($p['opacity'] / 100);
+					    $wm->getImagick()->setImageOpacity($p['opacity'] / 100);
 					}
 					catch (\Exception $e) {  // maybe. fallback for ImageMagick < 6.3.1
 						$a = round((100 - $p['opacity']) * 2.55);  // calculate alpha (0:opaque - 255:transparent)
 						$mask = $imagine->create($wmSize, self::$rgb->color(array($a, $a, $a)));
-						$wm->applyMask($mask->getImage());
+						$wm->applyMask($mask);
 					}
 				}
 
@@ -255,7 +254,7 @@ class Watermark extends ImagineAware {
 				}
 
 				if ($isRImage) {
-					$image->paste($wm->getImage(), $wmStartPoint);
+					$image->paste($wm, $wmStartPoint);
 				}
 				elseif ($p['opacity'] >= 100) {  // GD
 					$image->paste($wm, $wmStartPoint);
