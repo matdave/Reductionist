@@ -403,7 +403,9 @@ public function processImage($input, $output, $options = array()) {
 				}
 				elseif ($filter[0] === 'wmt' || $filter[0] === 'wmi') {
 					$doApply = true;
-					$transformation->add(new Filter\Watermark($filter, $filterlog));
+					$imagineAwareFilterWm = new Filter\Watermark($filter, $filterlog);
+					$imagineAwareFilterWm->setImagine($this->imagine);
+					$transformation->add($imagineAwareFilterWm);
 				}
 			}
 		}

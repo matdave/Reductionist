@@ -170,7 +170,7 @@ class ReductionistTest extends TestCase
             $this->reductionist->processImage(
                 $full,
                 $thumb,
-                ['w' => $this->width, 'fltr' => ['wmt|TEST|50']]
+                ['w' => $this->width, 'fltr' => ['wmt|TEST|50|C|ffffff']]
             );
             $this->assertFileExists($thumb);
             $this->assertFileNotEquals($full, $thumb);
