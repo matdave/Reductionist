@@ -34,14 +34,14 @@ public function __construct($graphicsLib = 2) {
 		$this->debugmessages[] = 'Using Imagick';
 		self::$maxsize = null;
 		set_time_limit(0);
-		$this->imagine = new Imagick\RImagine();
+		$this->imagine = new \Imagine\Imagick\Imagine();
 		$this->gLib = 2;
 	}
 	elseif ($graphicsLib && class_exists('Gmagick', false)) {
 		$this->debugmessages[] = 'Using Gmagick';
 		self::$maxsize = null;
 		set_time_limit(0);  // execution time accounting seems strange on some systems. Maybe because of multi-threading?
-		$this->imagine = new Gmagick\RImagine();
+		$this->imagine = new \Imagine\Gmagick\Imagine();
 		$this->gLib = 1;
 	}
 	else {  // good ol' GD
