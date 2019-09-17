@@ -1,0 +1,8 @@
+no-git/*
+.DS_Store
+update
+/test/vendor/
+/test/.phpunit.*
+/test/config.core.php
+/test/output/
+vendor/
