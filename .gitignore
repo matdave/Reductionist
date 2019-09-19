@@ -5,4 +5,5 @@ update
 /test/.phpunit.*
 /test/config.core.php
 /test/output/
+/test/coverage/
 vendor/
