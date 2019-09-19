@@ -6,7 +6,8 @@
     </testsuites>
     <filter>
       <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory suffix=".php">../src</directory>
+        <directory suffix=".php">../src/Reductionist/Filter</directory>
+        <file>../src/Reductionist/Reductionist.php</file>
       </whitelist>
     </filter>
     <logging>
