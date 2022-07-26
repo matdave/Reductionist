@@ -6,3 +6,4 @@ update
 /test/config.core.php
 /test/output/
 vendor/
+/.php-cs-fixer.cache
